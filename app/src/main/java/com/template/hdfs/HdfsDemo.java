@@ -1,12 +1,12 @@
-package com.template;
+package com.template.hdfs;
 
+import com.template.RunParam;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.RemoteIterator;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
@@ -22,7 +22,7 @@ public class HdfsDemo {
             @Override
             public void run(FileSystem fs) {
                 try {
-
+                    printRootFile(fs);
 
                 }catch (Exception e){
                     e.printStackTrace();
@@ -32,6 +32,15 @@ public class HdfsDemo {
 
         tempRunHDFSOperate(toRun);
 
+    }
+
+    private static void printRootFile(FileSystem fs) throws Exception {
+        RemoteIterator<LocatedFileStatus> locatedFileStatusRemoteIterator = fs.listFiles(new Path("/"), false);
+        while (locatedFileStatusRemoteIterator.hasNext()){
+            LocatedFileStatus locatedFileStatus = locatedFileStatusRemoteIterator.next();
+            String name = locatedFileStatus.getPath().getName();
+            System.out.println(name);
+        }
     }
 
     private static void tempRunHDFSOperate(RunParam toRun) throws IOException {
