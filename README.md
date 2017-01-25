@@ -1,4 +1,4 @@
-## templateJava-root
+## templateHadoopByJavaWithGradleBuild
 
-用于在As创建Java-Gradle模板
+用于在As创建hadoop-Java-Gradle模板
 
