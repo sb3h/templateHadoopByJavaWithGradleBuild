@@ -8,6 +8,20 @@ repositories {
     maven{url = 'http://maven.aliyun.com/nexus/content/groups/public/'}
 }
 
+sourceSets {
+    main {
+        java {
+
+        }
+
+//        resources{
+//            include "core-site.xml","hdfs-site.xml"
+////            core-site.xml
+////            hdfs-site.xml
+//        }
+    }
+}
+
 task jarMapReduce(type: Jar){
     appendix = 'mapReduce'
 //    include 'com.template.mr'
@@ -22,6 +36,7 @@ task jarMapReduce(type: Jar){
 dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
     compile 'org.apache.hadoop:hadoop-client:2.6.0'
+    compile 'org.apache.hadoop:hadoop-common-test:+'
     compile 'org.apache.hadoop:hadoop-yarn-client:2.6.0'
     compile 'org.apache.hadoop:hadoop-mapreduce-client-app:2.6.0'
     //假如运行local模式，一定要加上这个，不然会出错的，因为版本问题

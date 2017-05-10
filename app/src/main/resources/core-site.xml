@@ -20,7 +20,12 @@
 <property>
 <name>fs.defaultFS</name>
 <value>hdfs://master-node:9000</value>
-</property><!--
+</property>
+<property>
+<name>dfs.permissions</name>
+<value>false</value>
+</property>
+    <!--
 <property>
 <name>hadoop.tmp.dir</name>
 <value>/export/data/hadoop/tmp</value>
