@@ -7,7 +7,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.hadoop.mapreduce.lib.output.FileOutputFormatCounter;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +15,7 @@ import java.util.UUID;
 /**
  * Created by huanghh on 2017/1/25.
  */
-public class WcRunner {
+public class JunitWc {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         if(args.length == 0){
 
@@ -38,7 +37,7 @@ public class WcRunner {
          */
         job.setMapperClass(WcMapper.class);
         job.setReducerClass(WcReduce.class);
-        job.setJarByClass(WcRunner.class);
+        job.setJarByClass(JunitWc.class);
         /**
          * 指定mapper
          * 输出的key

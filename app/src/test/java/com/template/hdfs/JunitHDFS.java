@@ -1,40 +1,36 @@
 package com.template.hdfs;
 
-import com.template.RunParam;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
+import org.apache.hadoop.fs.permission.FsPermission;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
- * Created by huanghh on 2017/1/24.
+ * Created by sam3h on 2016/7/5 0005.
  */
-public class HdfsDemo {
+public class JunitHDFS {
+    FileSystem fs = null;
 
+    @Before
+    public void init() throws IOException {
+        Configuration conf = new Configuration();//此处的配置是因为你的resources有core-site.xml，hdfs-site.xml进行配置，不然默认是读取local
 
-    public static void main(String[] args) throws IOException {
-//        System.out.println("123");
+        fs = FileSystem.get(conf);
+    }
 
-        RunParam toRun = new RunParam<FileSystem>() {
-            @Override
-            public void run(FileSystem fs) {
-                try {
-//                    printRootFile(fs);
-                    testMkdirs(fs);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        tempRunHDFSOperate(toRun);
+    @Test
+    public void testRun() throws IOException {
 
     }
 
     private static final String TEST_ROOT_DIR = "/test";
 
-    private static void testMkdirs(FileSystem fs) throws IOException {
+    @Test
+    public void testMkdirs() throws IOException {
 
         Path test_dir = new Path(TEST_ROOT_DIR, "test_dir");
         Path test_file = new Path(TEST_ROOT_DIR, "file1");
@@ -48,7 +44,8 @@ public class HdfsDemo {
         }
     }
 
-    private static void printRootFile(FileSystem fs) throws Exception {
+    @Test
+    public void testPrintRootFile() throws Exception {
 //        RemoteIterator<LocatedFileStatus> itor = fs.listFiles(new Path("/"), false);
         RemoteIterator<LocatedFileStatus> itor = fs.listFiles(new Path("/"), true);
         while (itor.hasNext()) {
@@ -59,19 +56,8 @@ public class HdfsDemo {
         }
     }
 
-    private static void tempRunHDFSOperate(RunParam toRun) throws IOException {
-        /*此处的配置是因为你的resources
-        有core-site.xml，hdfs-site.xml进行配置，
-        不然默认是读取local*/
-        Configuration conf = new Configuration();
-
-        System.out.println(conf.get("fs.defaultFS"));
-        FileSystem fs = FileSystem.get(conf);
-
-        toRun.run(fs);
-
+    @After
+    public void end() throws IOException {
         fs.close();
     }
-
-
 }

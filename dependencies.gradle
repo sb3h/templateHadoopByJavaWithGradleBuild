@@ -1,93 +1,43 @@
 ext {
-  androidPlugin = "com.android.tools.build:gradle:2.2.1"
-  minSdkVersion = 14
-  targetSdkVersion = 24
-  compileSdkVersion = 24
-  buildToolsVersion = "24.0.0"
+    javaV = "1.8"
+    scalaV = "2.11"
+    hadoopV = "2.6.0"
+    sparkV = "2.0.1"
+    kafkaV = "0.8.2.2"
+    hiveV = "1.2.1"
+    deps = [
+            scala = "org.scala-lang:scala-library:$scalaV",
 
-  supportV = "24.0.0"
+            hadoop_client = "org.apache.hadoop:hadoop-client:$hadoopV",
+            hadoop_yarn_client = "org.apache.hadoop:hadoop-yarn-client:$hadoopV",
+            hadoop_mapreduce_client_app = "org.apache.hadoop:hadoop-mapreduce-client-app:$hadoopV",
 
-  //v4
-  supportV4="com.android.support:support-v4:${supportV}"
-  supportAnnotations="com.android.support:support-annotations:${supportV}"
-  //v7
-  supportAppcompat="com.android.support:appcompat-v7:${supportV}"
-  supportCardview="com.android.support:cardview-v7:${supportV}"
-  supportGridlayout="com.android.support:gridlayout-v7:${supportV}"
-  supportMediarouter="com.android.support:mediarouter-v7:${supportV}"
-  supportPalette="com.android.support:palette-v7:${supportV}"
-  supportPreferenceV7="com.android.support:preference-v7:${supportV}"
-  supportRecyclerview="com.android.support:recyclerview-v7:${supportV}"
+            hadoop_common_test = "org.apache.hadoop:hadoop-common-test:+",
 
-  //v13
-  supportV13="com.android.support:support-v13:${supportV}"
-  //v14
-  supportPreferenceV14="com.android.support:preference-v14:${supportV}"
+            //bigData
+            spark_streaming_kafka = "org.apache.spark:spark-streaming-kafka-0-8_$scalaV:$sparkV",
+            spark_streaming = "org.apache.spark:spark-streaming_$scalaV:$sparkV",
+            spark_core = "org.apache.spark:spark-core_$scalaV:$sparkV",
+            spark_sql = "org.apache.spark:spark-sql_$scalaV:$sparkV",
+            spark_hive = "org.apache.spark:spark-hive_$scalaV:$sparkV",
 
-  //v17
-  supportLeanback="com.android.support:leanback-v17:${supportV}"
-  supportPreferenceLeanback="com.android.support:preference-leanback-v17:${supportV}"
+            //hive
+            hive = "org.apache.hive:hive:$hiveV",
+            hiveCli = "org.apache.hive:hive-cli:$hiveV",
+            hiveJdbc = "org.apache.hive:hive-jdbc:$hiveV",
 
-  //v22
-  supportDesign="com.android.support:design:${supportV}"
-  supportPercent="com.android.support:percent:${supportV}"
-  //v23
-  supportCustomtabs="com.android.support:customtabs:${supportV}"
-  supportRecommendation="com.android.support:recommendation:${supportV}"
-  supportAnimatedVectorDrawable="com.android.support:animated-vector-drawable:${supportV}"
-  supportVectorDrawable="com.android.support:support-vector-drawable:${supportV}"
+            //memory db
+            redis_clients = "redis.clients:jedis:+",
 
-  //v24
-  supportCompat="com.android.support:support-compat:${supportV}"
-  supportCoreUI="com.android.support:support-core-ui:${supportV}"
-  supportCoreUtils="com.android.support:support-core-utils:${supportV}"
-  supportFragment="com.android.support:support-fragment:${supportV}"
-  supportMediaCompat="com.android.support:support-media-compat:${supportV}"
-  supportTransition="com.android.support:transition:${supportV}"
-  //other
-  supportMultidex="com.android.support:multidex:1.0.1"
-  supportMultidexInstrumentation="com.android.support:multidex-instrumentation:1.0.1"
-  supportConstraintLayout="com.android.support:constraint-layout:%s".replace("%s","1.0.0-alpha1")
-  supportConstraintLayoutSolver="com.android.support:constraint-layout-solver:%s".replace("%s","1.0.0-alpha1")
+            //Json parser
+            gson = "com.google.code.gson:gson:2.2.4",
+            //commons apache
+            commons_collections = "commons-collections:commons-collections:3.2.2",
 
-  //android test runner and rules
-  runnerAndRulesV = "0.4.1"
-  supportTestRunner = "com.android.support.test:runner:%s".replace("%s",runnerAndRulesV)
-  supportTestRules = "com.android.support.test:rules:%s".replace("%s",runnerAndRulesV)
+            //db connection
+            mysql = "mysql:mysql-connector-java:5.+",
 
-  //android test espresso
-  espressoV = "2.2.2"
-  supportTestEspresso = "com.android.support.test.espresso:espresso-core:%s".replace("%s",espressoV)
-  supportTestEspressoContrib = "com.android.support.test.espresso:espresso-contrib:%s".replace("%s",espressoV)
-
-  //java test
-  junit = "junit:junit:4.12"
-  truth = "com.google.truth:truth:0.27"
-
-  //image loader
-  imageloader =
-//  "com.nostra13.universalimageloader:universal-image-loader:1.9.3"
-//  "com.squareup.picasso:picasso:2.5.2"
-//  "com.facebook.fresco:fresco:0.12.0"
-  "com.github.bumptech.glide:glide:3.7.0"
-
-  //smack-android
-  smackV = "4.1.7"
-  smackAndroid = "org.igniterealtime.smack:smack-android:%s".replace("%s",smackV)
-  smackAndroidExtensions = "org.igniterealtime.smack:smack-android-extensions:%s".replace("%s",smackV)
-  smackTcp = "org.igniterealtime.smack:smack-tcp:%s".replace("%s",smackV)
-
-  //rx
-  rxJava = "io.reactivex:rxjava:1.2.1"
-  rxAndroid = "io.reactivex:rxandroid:1.2.1"
-  //lambda format
-  retrolambda = "me.tatarka:gradle-retrolambda:3.2.5"
-  /*
-  condition:
-    mavenCentral()
-    apply plugin: "me.tatarka.retrolambda"
-  */
-
-
-  javaParser = "com.github.javaparser:javaparser-core:2.1.0"
+            //test
+            junit = "junit:junit:4.12"
+    ]
 }
